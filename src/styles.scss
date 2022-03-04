@@ -1,35 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
-// @import "~bootstrap/scss/bootstrap";
-$light-grayish-blue: hsl(239,
-57%,
-85%);
-$moderate-blue: hsl(238,
-40%,
-52%);
-$pale-red: hsl(357,
-100%,
-86%);
-$soft-red: hsl(358,
-79%,
-66%);
-$white: hsl(0,
-0%,
-100%);
-$very-light-gray: hsl(228,
-33%,
-97%);
-$light-gray: hsl(223,
-19%,
-93%);
-$grayish-blue: hsl(211,
-10%,
-45%);
-$dark-blue: hsl(212,
-24%,
-26%);
-$text-color: hsl(211,
-10%,
-45%);
+@import "./scss/variables";
 html,
 body {
     margin: 0;
@@ -39,22 +9,21 @@ body {
 body {
     background-color: $very-light-gray;
     font-family: 'Rubik', 'sans-serif';
-    font-weight: 400;
     font-size: 1rem;
     color: $grayish-blue;
 }
 
 .comments-container {
-    display: flex;
     padding: 2rem .85rem;
     margin-left: auto;
     margin-right: auto;
     button {
-        cursor: grab;
+        cursor: pointer;
     }
 }
 
-button {
+.button {
+    background-color: transparent;
     margin: 0;
     line-height: 1.5;
     text-align: center;
@@ -62,16 +31,43 @@ button {
     padding: .375rem .75rem;
     border: 1px solid transparent;
     border-radius: .65rem;
-    font-weight: 500;
+    font-weight: 700;
 }
 
 .button-reply {
-    background-color: transparent;
     color: $moderate-blue;
-    font-weight: 700;
+    i.icon.reply {
+        background-color: $moderate-blue;
+    }
     &:hover {
         color: $light-grayish-blue;
         i.icon.reply {
+            background-color: $light-grayish-blue;
+        }
+    }
+}
+
+.button-delete {
+    color: $soft-red;
+    i.icon {
+        background-color: $soft-red;
+    }
+    &:hover {
+        color: $pale-red;
+        i.icon {
+            background-color: $pale-red;
+        }
+    }
+}
+
+.button-edit {
+    color: $moderate-blue;
+    i.icon {
+        background-color: $moderate-blue;
+    }
+    &:hover {
+        color: $light-grayish-blue;
+        i.icon {
             background-color: $light-grayish-blue;
         }
     }
@@ -82,19 +78,28 @@ i.icon {
     margin-right: .5rem;
     -webkit-mask-size: cover;
     mask-size: cover;
+    width: 1em;
+    height: 1em;
     &.reply {
         -webkit-mask-image: url("/assets/images/icon-reply.svg");
         mask-image: url("/assets/images/icon-reply.svg");
-        background-color: $moderate-blue;
-        width: 1em;
-        height: .9em;
         margin-bottom: -0.1em;
+    }
+    &.delete {
+        -webkit-mask-image: url("/assets/images/icon-delete.svg");
+        mask-image: url("/assets/images/icon-delete.svg");
+    }
+    &.edit {
+        -webkit-mask-image: url("/assets/images/icon-edit.svg");
+        mask-image: url("/assets/images/icon-edit.svg");
     }
 }
 
 .comment {
     background-color: $white;
     border-radius: .5rem;
+    margin-top: .75rem;
+    margin-bottom: .75rem;
     padding: 1rem 1rem 3rem;
     position: relative;
     .comment-header {
@@ -153,7 +158,22 @@ i.icon {
     }
 }
 
-@media (min-width: 376px) {
+.comment-replies-container {
+    position: relative;
+    &::before {
+        content: "";
+        background-color: $light-gray;
+        bottom: 0;
+        position: absolute;
+        top: 0;
+        width: 1px;
+    }
+    .comment {
+        margin-left: 1rem;
+    }
+}
+
+@media (min-width: 768px) {
     .comments-container {
         max-width: 70%;
         .comment {
@@ -165,6 +185,10 @@ i.icon {
             .comment-score {
                 flex-direction: column;
                 top: 1rem;
+                .button {
+                    font-weight: 700;
+                    font-size: 1.2rem;
+                }
                 &>button:not(:last-child) {
                     border-bottom-right-radius: 0;
                     border-bottom-left-radius: 0;
@@ -175,10 +199,16 @@ i.icon {
                     border-top-left-radius: 0;
                     border-top-right-radius: 0;
                 }
-                .comment-score-text {
-                    padding: .75rem .35rem;
-                }
             }
+        }
+    }
+    .comment-replies-container {
+        &::before {
+            width: 2px;
+            left: 2em;
+        }
+        .comment {
+            margin-left: 4rem;
         }
     }
 }
