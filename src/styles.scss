@@ -81,17 +81,17 @@ i.icon {
     width: 1em;
     height: 1em;
     &.reply {
-        -webkit-mask-image: url("/assets/images/icon-reply.svg");
-        mask-image: url("/assets/images/icon-reply.svg");
+        -webkit-mask-image: url("assets/images/icon-reply.svg");
+        mask-image: url("assets/images/icon-reply.svg");
         margin-bottom: -0.1em;
     }
     &.delete {
-        -webkit-mask-image: url("/assets/images/icon-delete.svg");
-        mask-image: url("/assets/images/icon-delete.svg");
+        -webkit-mask-image: url("assets/images/icon-delete.svg");
+        mask-image: url("assets/images/icon-delete.svg");
     }
     &.edit {
-        -webkit-mask-image: url("/assets/images/icon-edit.svg");
-        mask-image: url("/assets/images/icon-edit.svg");
+        -webkit-mask-image: url("assets/images/icon-edit.svg");
+        mask-image: url("assets/images/icon-edit.svg");
     }
 }
 
