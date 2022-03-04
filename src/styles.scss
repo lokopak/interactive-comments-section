@@ -67,11 +67,8 @@ button {
     font-weight: 700;
     &:hover {
         color: $light-grayish-blue;
-        & i::before {
-            fill: $light-grayish-blue;
-        }
-        img {
-            fill: $light-grayish-blue;
+        i.icon.reply {
+            background-color: $light-grayish-blue;
         }
     }
 }
@@ -79,17 +76,15 @@ button {
 i.icon {
     display: inline-block;
     margin-right: .5rem;
-    text-align: right;
+    -webkit-mask-size: cover;
+    mask-size: cover;
     &.reply {
-        &::before {
-            content: " ";
-            display: inline-block;
-            width: 1em;
-            height: .9em;
-            background-image: url("/assets/images/icon-reply.svg");
-            background-size: cover;
-            margin-bottom: -0.2em;
-        }
+        -webkit-mask-image: url("/assets/images/icon-reply.svg");
+        mask-image: url("/assets/images/icon-reply.svg");
+        background-color: $moderate-blue;
+        width: 1em;
+        height: .9em;
+        margin-bottom: -0.1em;
     }
 }
 
