@@ -97,13 +97,18 @@ i.icon {
     border-radius: .5rem;
     padding: 1rem 1rem 3rem;
     position: relative;
+    .comment-header {
+        display: flex;
+        width: 100%;
+        align-items: center;
+    }
     .comment-user-avatar {
         width: 2rem;
         height: 2rem;
         margin-right: 1rem;
     }
     .comment-body {
-        padding: 1rem 0;
+        margin-top: .5rem;
     }
     .comment-username {
         color: #000;
