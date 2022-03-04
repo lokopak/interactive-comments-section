@@ -12,6 +12,10 @@ import { TempData } from '../../data/comments';
         [comment]="comment"
         [currentUser]="currentUser"
       ></app-comment>
+      <app-comments-box
+        *ngIf="currentUser"
+        [currentUser]="currentUser"
+      ></app-comments-box>
     </div>
   `,
 })

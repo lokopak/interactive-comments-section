@@ -1,0 +1,9 @@
+<div class="comment-box">
+    <div class="comment-user-avatar" [ngStyle]="{'background-image': currentUser.image.png ? 'url(' + currentUser.image.png + ')': null }"></div>
+    <div class="input-area">
+        <textarea name="content" rows="3" id="content" placeholder="Add a comment..."></textarea>
+    </div>
+    <div class="comment-tools" style="float: right;">
+        <button class="button button-send" type="button">Send</button>
+    </div>
+</div>
