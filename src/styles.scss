@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
-@import "~bootstrap/scss/bootstrap";
+// @import "~bootstrap/scss/bootstrap";
 $light-grayish-blue: hsl(239,
 57%,
 85%);
@@ -45,7 +45,7 @@ body {
 }
 
 .comments-container {
-    width: 100%;
+    display: flex;
     padding: 2rem .85rem;
     margin-left: auto;
     margin-right: auto;
@@ -56,6 +56,10 @@ body {
 
 button {
     margin: 0;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    padding: .375rem .75rem;
     border: 1px solid transparent;
     border-radius: .65rem;
     font-weight: 500;
@@ -121,7 +125,6 @@ i.icon {
         button {
             background-color: $very-light-gray;
             color: $light-grayish-blue;
-            width: 2.5rem;
             &:hover {
                 color: $moderate-blue;
             }
@@ -140,8 +143,7 @@ i.icon {
             border-color: $very-light-gray;
             color: $moderate-blue;
             font-weight: 500;
-            width: 2.5rem;
-            padding: .35rem .75rem;
+            padding: .35rem .25rem;
         }
     }
 }
