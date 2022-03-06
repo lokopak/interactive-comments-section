@@ -91,7 +91,8 @@
                             "browserTarget": "interactive-comments-section:build:production"
                         },
                         "development": {
-                            "browserTarget": "interactive-comments-section:build:development"
+                            "browserTarget": "interactive-comments-section:build:development",
+                            "proxyConfig": "src/proxy.config.json"
                         }
                     },
                     "defaultConfiguration": "development"
