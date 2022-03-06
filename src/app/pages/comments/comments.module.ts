@@ -5,7 +5,7 @@ import { CommentsRoutingModule } from './comments.routing.module';
 import { CommentComponent } from './components/comment/comment.component';
 import { CommentsBoxComponent } from './components/comments-box/comments-box.component';
 import { CommentsContainerComponent } from './components/comments-container/comments-container.component';
-import { CommentsService } from './service/comments.service';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
 
 @NgModule({
   declarations: [
