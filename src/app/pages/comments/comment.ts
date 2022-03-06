@@ -11,7 +11,7 @@ export interface IUser {
 export interface IComment {
   id: number;
   content: string;
-  createdAt: string;
+  createdAt: string; // formated date "YYYY-MM-dd HH:mm:ss"
   score: number;
   user: IUser;
   replyingTo?: string;

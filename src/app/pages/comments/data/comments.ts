@@ -4,7 +4,7 @@ export const TempData = {
       png: 'assets/images/avatars/image-juliusomo.png',
       webp: 'assets/images/avatars/image-juliusomo.webp',
     },
-    username: 'juliusomo',
+    username: 'amyrobson',
   },
   comments: [
     {

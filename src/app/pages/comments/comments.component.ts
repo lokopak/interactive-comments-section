@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CommentsService } from './service/comments.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { CommentService } from './service/comment.service';
 
 @Component({
   selector: 'app-comments',
@@ -10,15 +12,28 @@ import { CommentsService } from './service/comments.service';
     </section>
   `,
 })
-export class CommentsComponent implements OnInit {
+export class CommentsComponent implements OnDestroy, OnInit {
   comments: any[] = [];
 
-  constructor(private commentsService: CommentsService) {
-    // TODO: move to ngOnInit when remote server is available
-    this.comments = this.commentsService.getComments();
+  private _destroy$: Subject<void> = new Subject<void>();
+
+  constructor(private _commentsService: CommentService) {
+    this.comments = [];
   }
 
   ngOnInit(): void {
-    console.log('comments', this.comments);
+    this._commentsService
+      .getAll()
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((response) => {
+        if (response.items) {
+          this.comments = response.items;
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 }

@@ -1,24 +1,25 @@
-<div class="comment">
+<div class="comment" [attr.id]=" 'comment-' + comment.id">
     <div class="comment-header">
         <div class="comment-user-avatar" [ngStyle]="{'background-image': comment.user.image.png ? 'url(' + comment.user.image.png + ')': null }"></div>
-        <span class="comment-username">{{ comment.user.username }}</span><span class="comment-time">{{ comment.createdAt }}</span>
+        <span class="comment-username">{{ comment.user.username }}</span><span class="comment-time">{{ comment.createdAt | timeAgo }}</span>
     </div>
     <div class="comment-body">
         <p>
-            {{ comment.content }}
+            <span class="comment-reply-to" *ngIf="comment.replyingTo">@{{ comment.replyingTo }}</span> {{ comment.content }}
         </p>
     </div>
     <div class="comment-score" role="group" aria-label="Score it">
-        <button class="button comment-score-btn" type="button">+</button>
+        <button class="button comment-score-btn" type="button" (click)="vote(1)">+</button>
         <span class="comment-score-text">{{ comment.score }}</span>
-        <button class="button comment-score-btn" type="button">-</button>
+        <button class="button comment-score-btn" type="button" (click)="vote(-1)">-</button>
     </div>
     <div class="comment-tools">
-        <button class="button button-reply" type="button" *ngIf="currentUser.username !== comment.user.username"><i class="icon reply"></i>Reply</button>
-        <button class="button button-delete" type="button" *ngIf="currentUser.username === comment.user.username"><i class="icon delete"></i>Delete</button>
-        <button class="button button-edit" type="button" *ngIf="currentUser.username === comment.user.username"><i class="icon edit"></i>Edit</button>
+        <button class="button button-reply" type="button" *ngIf="currentUser.username !== comment.user.username" (click)="reply()"><i class="icon reply"></i>Reply</button>
+        <button class="button button-delete" type="button" *ngIf="currentUser.username === comment.user.username" (click)="delete()"><i class="icon delete"></i>Delete</button>
+        <button class="button button-edit" type="button" *ngIf="currentUser.username === comment.user.username" (click)="edit()"><i class="icon edit"></i>Edit</button>
     </div>
 </div>
 <div class="comment-replies-container" *ngIf="comment.replies">
     <app-comment *ngFor="let reply of comment.replies" [comment]="reply" [currentUser]="currentUser"></app-comment>
+    <app-comments-box [currentUser]="currentUser" [replyingTo]="comment" *ngIf="replying" (replied)="replied()"></app-comments-box>
 </div>
