@@ -1,0 +1,61 @@
+.button {
+    display: inline-block;
+    background-color: transparent;
+    margin: 0;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    padding: .375rem .75rem;
+    border: 1px solid transparent;
+    border-radius: .65rem;
+    font-weight: 700;
+}
+
+.button-reply {
+    color: $moderate-blue;
+    i.icon.reply {
+        background-color: $moderate-blue;
+    }
+    &:hover {
+        color: $light-grayish-blue;
+        i.icon.reply {
+            background-color: $light-grayish-blue;
+        }
+    }
+}
+
+.button-delete {
+    color: $soft-red;
+    i.icon {
+        background-color: $soft-red;
+    }
+    &:hover {
+        color: $pale-red;
+        i.icon {
+            background-color: $pale-red;
+        }
+    }
+}
+
+.button-edit {
+    color: $moderate-blue;
+    i.icon {
+        background-color: $moderate-blue;
+    }
+    &:hover {
+        color: $light-grayish-blue;
+        i.icon {
+            background-color: $light-grayish-blue;
+        }
+    }
+}
+
+.button-send {
+    background-color: $moderate-blue;
+    color: $white;
+    padding: .75rem 1.85rem;
+    text-transform: uppercase;
+    &:hover {
+        background-color: $light-grayish-blue;
+    }
+}
