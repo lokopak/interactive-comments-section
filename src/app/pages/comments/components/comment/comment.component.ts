@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SecurityContext } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { IComment, IUser } from '../../comment';
 import { CommentService } from '../../service/comment.service';
 
@@ -13,7 +14,7 @@ export class CommentComponent {
 
   replying = false;
 
-  constructor(private _commentsService: CommentService) {}
+  constructor(private _commentsService: CommentService, private _sanitizer: DomSanitizer) {}
 
   reply(): void {
     this.replying = true;
@@ -41,5 +42,10 @@ export class CommentComponent {
     this._commentsService.vote(this.comment, value).subscribe((result) => {
       console.log(result);
     });
+  }
+
+  getUserAvatar(): string {
+    let url = this.comment.user.image.webp ? this.comment.user.image.webp : (this.comment.user.image.png ? this.comment.user.image.png : 'assets/images/avatars/not-user-image.png');
+    return this._sanitizer.sanitize(SecurityContext.URL, `url(${url})`) || 'assets/images/avatars/not-user-image.png';
   }
 }

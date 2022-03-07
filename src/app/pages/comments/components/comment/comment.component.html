@@ -1,6 +1,6 @@
 <div class="comment" [attr.id]=" 'comment-' + comment.id">
     <div class="comment-header">
-        <div class="comment-user-avatar" [ngStyle]="{'background-image': comment.user.image.png ? 'url(' + comment.user.image.png + ')': null }"></div>
+        <div class="comment-user-avatar" [ngStyle]="{'background-image': getUserAvatar() }"></div>
         <span class="comment-username">{{ comment.user.username }}</span><span class="comment-time">{{ comment.createdAt | timeAgo }}</span>
     </div>
     <div class="comment-body">
