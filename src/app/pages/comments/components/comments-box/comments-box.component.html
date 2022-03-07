@@ -4,6 +4,6 @@
         <textarea name="content" rows="3" id="content" placeholder="Add a comment..." [(ngModel)]="content"></textarea>
     </div>
     <div class="comment-tools" style="float: right;">
-        <button class="button button-send" type="button" (click)="send()">Send</button>
+        <button class="button button-send" type="button" (click)="send()" [disabled]="content.length === 0">Send</button>
     </div>
 </div>
