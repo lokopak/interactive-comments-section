@@ -1,4 +1,6 @@
-export const TempData = {
+import { IComment, IUser } from "../comment";
+
+export const TempData: {currentUser: IUser, comments: IComment[]} = {
   currentUser: {
     image: {
       png: 'assets/images/avatars/image-juliusomo.png',
@@ -50,6 +52,7 @@ export const TempData = {
             },
             username: 'ramsesmiron',
           },
+          replies: [],
         },
         {
           id: 4,
@@ -65,6 +68,7 @@ export const TempData = {
             },
             username: 'juliusomo',
           },
+          replies: []
         },
       ],
     },
