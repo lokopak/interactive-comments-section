@@ -149,14 +149,13 @@ export class OfflineCommentService extends CommentService implements OnInit {
     };
 
     if (replyTo) {
-      console.log('comment', comment, 'repyto', replyTo);
       comment.replyingTo = replyTo.user.username;
-      const father = this._comments.find((item) => item.id == replyTo.id);
-      if (!father) {
-        throw new Error("Comment not found");
+      const parent = this._comments.find((item) => item.id == replyTo.id);
+      if (!parent) {
+        return of({type: "error", message: "Comment not found"});
       }
 
-      father.replies.push(comment);
+      parent.replies.push(comment);
     }
     else {
       this._comments.push(comment);
