@@ -153,7 +153,7 @@ export class OfflineCommentService extends CommentService {
 
     if (replyTo) {
       comment.replyingTo = replyTo.user.username;
-      const parent = this._comments.find((item) => item.id == replyTo.id);
+      const parent = this._serachParent(replyTo);
       if (!parent) {
         return of({type: "error", message: "Comment not found"});
       }
@@ -264,5 +264,10 @@ export class OfflineCommentService extends CommentService {
     }
 
     return found;
+  }
+
+  private _serachParent(comment: IComment): IComment | null {
+    const parent = this._searchComment(comment).parent;
+    return parent >= 0 ? this._comments[parent] : null;
   }
 }
