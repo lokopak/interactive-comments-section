@@ -21,7 +21,7 @@ import { CommentService } from './comment.service';
  * @implements {OnInit}
  */
 @Injectable()
-export class OfflineCommentService extends CommentService implements OnInit {
+export class OfflineCommentService extends CommentService {
 
   /**
    * We'll store all comments in the local storage
@@ -104,9 +104,6 @@ export class OfflineCommentService extends CommentService implements OnInit {
     return ++this._currentId;
   }
 
-  ngOnInit(): void {
-  }
-
   /**
    * Gets all available comments from backend
    *
@@ -152,6 +149,7 @@ export class OfflineCommentService extends CommentService implements OnInit {
       createdAt: formatDate(Date.now(), COMMENT_DATE_FORMAT, COMMENT_LOCALE),
       score: 0,
     };
+
 
     if (replyTo) {
       comment.replyingTo = replyTo.user.username;
