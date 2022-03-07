@@ -72,9 +72,10 @@ export interface CommentServiceInterface {
    *
    * Votes can be positive or negative
    *
+   * @param {IComment} comment
    * @param {number} vote
    * @memberof CommentServiceInterface
    */
-  vote(vote: number): void;
+  vote(comment: IComment, vote: number): Observable<IServerResponse>;
 
 }
