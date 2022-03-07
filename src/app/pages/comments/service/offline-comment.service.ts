@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { share } from 'rxjs/operators';
 import { APP_WINDOW } from 'src/app/app.options';
 import { IComment, IUser } from '../comment';
-import { COMMENTS_TABLE_NAME } from '../comment.config';
+import { COMMENTS_TABLE_NAME, COMMENT_DATE_FORMAT, COMMENT_LOCALE } from '../comment.config';
 import { TempData } from '../data/comments';
 import { IServerResponse } from './comment-service.interface';
 import { CommentService } from './comment.service';
@@ -149,7 +149,7 @@ export class OfflineCommentService extends CommentService implements OnInit {
       content: content,
       user: user,
       replies: [],
-      createdAt: formatDate(Date.now(), "YYYY-MM-dd HH:mm:ss", 'en-EN'),
+      createdAt: formatDate(Date.now(), COMMENT_DATE_FORMAT, COMMENT_LOCALE),
       score: 0,
     };
 
