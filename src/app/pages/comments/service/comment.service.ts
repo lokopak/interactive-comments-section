@@ -75,10 +75,11 @@ export abstract class CommentService implements CommentServiceInterface {
    *
    * Votes can be positive or negative
    *
+   * @param {IComment} comment
    * @param {number} vote
    * @memberof CommentServiceInterface
    */
-  vote(vote: number): void {
+   vote(comment: IComment, vote: number): Observable<IServerResponse> {
     throw new Error('Method not implemented.');
   }
 }

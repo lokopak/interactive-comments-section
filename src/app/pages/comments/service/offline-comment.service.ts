@@ -214,12 +214,53 @@ export class OfflineCommentService extends CommentService implements OnInit {
    * @param {number} vote
    * @memberof CommentServiceInterface
    */
-  vote(vote: number): void {
-    // Nothing to do here
-    if (vote === 0) {
-      return;
+  vote(comment: IComment, vote: number): Observable<IServerResponse> {
+    const index = this._searchComment(comment);
+
+    // Comment not found?!
+    if (index.parent < 0) {
+      return of({type: 'error', 'message': 'Element not found'});
     }
 
+    // Is main comment
+    if (index.child < 0) {
+      // If we found it, just removes from replies and return feedback
+      this._comments[index.parent].score += vote;
+    }
+    else {
+      this._comments[index.parent].replies[index.child].score += vote;
+    }
 
+    // We update comment's socre, update storage
+    this._storage.setItem(COMMENTS_TABLE_NAME, JSON.stringify(this._comments));
+
+    this._subject.next({items: this._comments});
+
+    return of({type: 'success', 'message': 'Element updated successfully'})
+  }
+
+  private _searchComment(comment: IComment): {parent: number, child: number} {
+    let found = {parent: -1, child: -1};
+    // If the comment is a reply to other comment or another reply
+    if (comment.replyingTo) {
+      let index;
+      // Find the comment in each main comment's replies
+      for(let i = 0; i < this._comments.length; i++ ) {
+        if (this._comments[i].replies) {
+          index = this._comments[i].replies.indexOf(comment);
+          // If we found it, just removes from replies and return feedback
+          if (index >= 0) {
+            found = {parent: i, child: index};
+            break;
+          }
+        }
+      }
+    }
+    // Otherwise search in main comments
+    else {
+      found.parent = this._comments.indexOf(comment);
+    }
+
+    return found;
   }
 }

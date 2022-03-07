@@ -49,6 +49,15 @@ export class OnlineCommentService extends CommentService {
     throw new Error('Method not implemented.');
   }
 
+  /**
+   * Add a vote to a comment.
+   *
+   * Votes can be positive or negative
+   *
+   * @param {number} vote
+   * @memberof CommentServiceInterface
+   */
+  vote(comment: IComment, vote: number): Observable<IServerResponse> {
     throw new Error('Method not implemented.');
   }
 }

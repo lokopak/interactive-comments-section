@@ -34,9 +34,8 @@ export class CommentComponent {
   }
 
   vote(value: number): void {
-    this.comment.score += value;
-    if (this.comment.score < 0) {
-      this.comment.score = 0;
-    }
+    this._commentsService.vote(this.comment, value).subscribe((result) => {
+      console.log(result);
+    });
   }
 }
