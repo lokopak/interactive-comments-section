@@ -34,6 +34,10 @@ export class CommentComponent {
   }
 
   vote(value: number): void {
+    // Hey!!! You can't vote your comments!!!
+    if (this.currentUser.username === this.comment.user.username) {
+      return;
+    }
     this._commentsService.vote(this.comment, value).subscribe((result) => {
       console.log(result);
     });
