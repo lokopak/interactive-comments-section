@@ -1,5 +1,29 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+const SECOND = 1000,
+      MINUTE = 60 * SECOND,
+      HOUR = 60 * MINUTE,
+      DAY = 24 * HOUR,
+      WEEK = 7 * DAY,
+      YEAR = 365 * DAY,
+      MONTH = YEAR / 12;
+
+const FORMAT: any[] = [
+  [ 0.5 * MINUTE, 'just now' ],
+  [ 2 * MINUTE, '1 minute ago' ],
+  [ HOUR, 'minutes ago', MINUTE ],
+  [ 2 * HOUR, '1 hour ago' ],
+  [ DAY, 'hours ago', HOUR ],
+  [ 2 * DAY, '1 day ago' ],
+  [ WEEK, 'days ago', DAY ],
+  [ 2 * WEEK, '1 week ago'],
+  [ MONTH, 'weeks ago', WEEK ],
+  [ 2 * MONTH, '1 month ago' ],
+  [ YEAR, 'months ago', MONTH ],
+  [ 2 * YEAR, '1 year ago' ],
+  [ Number.MAX_VALUE, 'years ago', YEAR ]
+];
+
 @Pipe({
   name: 'timeAgo'
 })
@@ -8,56 +32,14 @@ export class TimeAgoPipe implements PipeTransform {
   transform(value: any, args?: any): any {
     const now = Date.now();
     const createdAt = new Date(value).getTime();
+
     // Get difference as seconds
-    const diff = (now - createdAt) / 1000;
+    const diff = (now - createdAt);
 
-    let test = 60;
-    if (diff < test) {
-      return `a few seconds ago`;
+    for(let format of FORMAT ){
+      if (diff < format[0]) {
+        return format[2] === undefined ? format[1] : Math.floor(diff / format[2]) + ' ' + format[1]
+      }
     }
-    // To avoid operations
-    let time = test;
-    test *= 60;
-    // Less than 1 hour
-    if (diff < test) {
-      let minutes = Math.floor(diff / time);
-      return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
-    }
-    time = test;
-    test *= 24;
-    // Less than 24 hours
-    if (diff < test) {
-      let hours = Math.floor(diff / time);
-      return `${hours} hours${hours > 1 ? 's' : ''} ago`;
-    }
-    time = test;
-    test *= 7;
-    // Less than 1 week
-    if (diff < test) {
-      let days = Math.floor(diff / time);
-      return `${days} days${days > 1 ? 's' : ''} ago`;
-    }
-    time = test;
-    test *= 7;
-    // More than 1 week and less than a mounth
-    if (diff < test) {
-      let weeks = Math.floor(diff / time);
-      return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
-    }
-    time = test;
-    test *= 30;
-    // More than a mounth and less than a year
-    if (diff < test) {
-      let mounth = Math.floor(diff / time);
-      return `${mounth} mounth${mounth > 1 ? 's' : ''} ago`;
-    }
-
-    // One year or more
-    time = test;
-    test *= 12;
-
-    let years = Math.floor(diff / time);
-    return `${years} year${years > 1 ? 's' : ''} ago`;
   }
-
 }
