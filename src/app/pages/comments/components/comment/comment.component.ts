@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IComment, IUser } from '../../comment';
 import { CommentService } from '../../service/comment.service';
 
@@ -7,17 +7,13 @@ import { CommentService } from '../../service/comment.service';
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss'],
 })
-export class CommentComponent implements OnInit {
+export class CommentComponent {
   @Input() comment!: IComment;
   @Input() currentUser!: IUser;
 
   replying = false;
 
   constructor(private _commentsService: CommentService) {}
-
-  ngOnInit(): void {
-    console.log('comment', this.comment);
-  }
 
   reply(): void {
     this.replying = true;
