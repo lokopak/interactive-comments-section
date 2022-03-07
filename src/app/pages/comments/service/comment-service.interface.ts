@@ -62,10 +62,10 @@ export interface CommentServiceInterface {
   /**
    * Delete a single comment (and its replies) from backend
    *
-   * @param {(number | string)} id
+   * @param {IComment} comment
    * @return {(Observable<IServerResponse>)}
    */
-  delete(id: number | string): Observable<IServerResponse>;
+  delete(comment: IComment): Observable<IServerResponse>;
 
   /**
    * Add a vote to a comment.

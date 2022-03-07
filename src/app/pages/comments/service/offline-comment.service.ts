@@ -182,10 +182,28 @@ export class OfflineCommentService extends CommentService implements OnInit {
   /**
    * @inheritDoc
    */
-  delete(
-    id: string | number
-  ): Observable<IServerResponse> {
-    throw new Error('Method not implemented.');
+  delete(comment: IComment): Observable<IServerResponse> {
+    let index = this._searchComment(comment);
+
+    // Comment not found?!
+    if (index.parent < 0) {
+      return of({type: 'error', 'message': 'Element not found'});
+    }
+
+    // Is main comment
+    if (index.child < 0) {
+      // If we found it, just removes from replies and return feedback
+      this._comments.splice(index.parent, 1);
+    }
+    else {
+      this._comments[index.parent].replies.splice(index.child, 1);
+    }
+
+    // We deleted the comment, update storage
+    this._storage.setItem(COMMENTS_TABLE_NAME, JSON.stringify(this._comments));
+    this._subject.next({items: this._comments});
+
+    return of({type: 'success', 'message': 'Element deleted successfully'});
   }
 
   /**

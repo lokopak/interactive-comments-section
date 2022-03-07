@@ -45,9 +45,10 @@ export class OnlineCommentService extends CommentService {
   /**
    * @inheritDoc
    */
-  delete(
-    id: string | number
-  ): Observable<IServerResponse> {
+  delete(comment: IComment): Observable<IServerResponse> {
+    throw new Error('Method not implemented.');
+  }
+
     throw new Error('Method not implemented.');
   }
 }

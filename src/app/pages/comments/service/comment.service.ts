@@ -63,10 +63,10 @@ export abstract class CommentService implements CommentServiceInterface {
   /**
    * Deletes a comment from backend
    *
-   * @param {(string | number)} id
+   * @param {IComment} comment
    * @return {*}  {Observable<IServerResponse>}
    */
-  delete(id: string | number): Observable<IServerResponse> {
+  delete(comment: IComment): Observable<IServerResponse> {
     throw new Error('Method not implemented.');
   }
 

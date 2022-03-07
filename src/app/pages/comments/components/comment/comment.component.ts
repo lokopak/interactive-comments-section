@@ -24,7 +24,9 @@ export class CommentComponent {
   }
 
   delete(): void {
-    console.log('deleting');
+    this._commentsService.delete(this.comment).subscribe((result) => {
+      console.log(result);
+    });
   }
 
   edit(): void {
