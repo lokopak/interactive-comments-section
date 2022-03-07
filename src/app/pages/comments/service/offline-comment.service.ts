@@ -5,6 +5,7 @@ import { share } from 'rxjs/operators';
 import { APP_WINDOW } from 'src/app/app.options';
 import { IComment, IUser } from '../comment';
 import { COMMENTS_TABLE_NAME } from '../comment.config';
+import { TempData } from '../data/comments';
 import { IServerResponse } from './comment-service.interface';
 import { CommentService } from './comment.service';
 
@@ -76,6 +77,10 @@ export class OfflineCommentService extends CommentService implements OnInit {
     const item = this._storage.getItem(COMMENTS_TABLE_NAME);
     if (item !== null) {
       this._comments = JSON.parse(item);
+    }
+    else {
+      this._comments = TempData.comments;
+      this._storage.setItem(COMMENTS_TABLE_NAME, JSON.stringify(this._comments));
     }
     const response: IServerResponse = {
       items: this._comments
